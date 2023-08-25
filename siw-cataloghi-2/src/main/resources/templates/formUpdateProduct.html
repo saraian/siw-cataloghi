@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title th:text="${movie.title}">Modifica film</title>
+		<link rel="stylesheet" href="/stile.css?version=3"/>
+	</head>
+	<body>
+		<header th:replace="fragments/base.html::intestazione"></header>
+		<h1 th:text="${product.name}"> Prodotto </h1>
+		<div>
+			<span th:text="${messaggioErrore}"> </span>
+		</div>
+		<div>
+			<a th:href="@{/updateSupplierForProduct/{idProduct} (idProduct=${product.id})}"> Aggiungi o rimuovi fornitori </a>
+		</div>
+		<div>
+			<a th:href"@{/updateProductInfo/{idProduct} (idProduct=${product.id})}> Aggiorna le informazioni del prodotto </a>
+		<div>
+			<a th:href="@{/deleteProduct/{idProduct} (idProduct=${product.id})}"> Rimuovi questo prodotto </a>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Gestisci prodotti</title>
+		<link rel="stylesheet" href="/stile.css?version=3"/>
+	</head>
+	<body>
+	<header th:replace="fragments/base.html::intestazione"></header>
+	<h1>Scegli un prodotto da modificare</h1>
+		<div th:if="${products.empty}"> 
+			<div> Non ci sono prodotti </div>
+		</div>
+		<div th:each="product:${products}">
+			<a th:href="@{/formUpdateProduct/{id} (id=${product.id})}">
+				<li th:text="${product.name}"> Nome prodotto </li> 
+			</a>
+		</div>
+	</body>
+</html>

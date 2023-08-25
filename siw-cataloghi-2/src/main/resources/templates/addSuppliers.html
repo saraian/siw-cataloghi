@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Aggiungi o rimuovi fornitori</title>
+		<link rel="stylesheet" href="/stile.css?version=3"/>
+	</head>
+	<body>
+	<header th:replace="fragments/base.html::intestazione"></header>
+		<h1>Fornitori correnti: </h1>
+			<div th:each="supplier:${suppliers}">
+				<form th:action="@{/modifySupplier/{idSupplier}/{idProduct} (idSupplier=${supplier.id}, idProduct=${product.id})}" method="POST" th:object="${product}">
+					<button type="submit">
+						<li th:text="${supplier.name}"> Nome </li> 
+					</button>
+				</form>
+			</div>
+		<h1>Fornitori disponibili: </h1> 
+			<div th:each="other:${others}">
+				<form th:action="@{/modifyActor/{idArtist}/{idMovie} (idArtist=${other.id}, idMovie=${movie.id})}" method="POST" th:object="${movie}">
+					<button type="submit">
+						<li th:text="${other.name}+' '+${other.surname}"> Nome </li> 
+					</button>
+				</form>
+			</div>
+	</body>
+</html>
