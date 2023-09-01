@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Prodotto</title>
+		<link rel="stylesheet" href="/stile.css?version=2"/>
+	</head>
+	<body>
+		<header th:replace="fragments/base.html::intestazione"></header>
+		<div th:if="${product}">
+			<h1 th:text="${product.name}">Nome</h1>
+			<div> Descrizione: <span th:text=${product.description}> Descrizione </span> </div>
+			<h2> Fornitori: </h2>
+			<div th:each="supplier:${product.suppliers}">
+			<a th:href="@{/supplier/{id} (id=${supplier.id})}">
+				<li th:text="${supplier.name}"> Nome fornitore </li> 
+			</a>
+			</div>
+		</div>
+		<div th:unless="${product}">Non esiste</div>	
+	</body>
+</html>

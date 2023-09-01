@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Login</title>
+		<link rel="stylesheet" href="/stile.css?version=3"/>
+	</head>
+	<body>
+	<header th:replace="fragments/base.html::intestazione"></header>
+	<h1>Login </h1>
+	<form th:action="@{/login}" method="POST">
+	<c:if test="${param.error != null}">
+    	<div>
+    		Failed to login.
+            <c:if test="${SPRING_SECURITY_LAST_EXCEPTION != null}">
+            	Reason: <c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />
+            </c:if>
+        </div>
+    </c:if>
+	</div>
+	<div>
+		<label>Username:</label> <span><input required type="text" id="username" name="username"/></span>
+	</div>
+	<div>
+		<label>Password:</label> <span><input required type="password" id="password" name="password"/></span>
+	</div>
+	<div>
+	<span><button type="submit" value="login">Conferma </button> </span>
+	</div>
+	</form>
+	<a href="formRegisterUser.html" th:href="@{/register}"> 
+		<div> Registrati </div>
+	</a>
+	</body>
+</html>

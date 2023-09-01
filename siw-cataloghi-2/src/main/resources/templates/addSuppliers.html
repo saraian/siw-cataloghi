@@ -7,18 +7,18 @@
 	<body>
 	<header th:replace="fragments/base.html::intestazione"></header>
 		<h1>Fornitori correnti: </h1>
-			<div th:each="supplier:${suppliers}">
-				<form th:action="@{/modifySupplier/{idSupplier}/{idProduct} (idSupplier=${supplier.id}, idProduct=${product.id})}" method="POST" th:object="${product}">
+			<div th:each="supplier:${currentSuppliers}">
+				<form th:action="@{/updateSupplierForProduct/{idProduct}/{idSupplier} (idSupplier=${supplier.id}, idProduct=${product.id})}" method="POST" th:object="${product}">
 					<button type="submit">
 						<li th:text="${supplier.name}"> Nome </li> 
 					</button>
 				</form>
 			</div>
-		<h1>Fornitori disponibili: </h1> 
-			<div th:each="other:${others}">
-				<form th:action="@{/modifyActor/{idArtist}/{idMovie} (idArtist=${other.id}, idMovie=${movie.id})}" method="POST" th:object="${movie}">
+		<h1>Altri fornitori disponibili: </h1> 
+			<div th:each="otherSupplier:${newSuppliers}">
+				<form th:action="@{/updateSupplierForProduct/{idProduct}/{idSupplier} (idSupplier=${otherSupplier.id}, idProduct=${product.id})}" method="POST" th:object="${product}">
 					<button type="submit">
-						<li th:text="${other.name}+' '+${other.surname}"> Nome </li> 
+						<li th:text="${otherSupplier.name}"> Nome </li> 
 					</button>
 				</form>
 			</div>

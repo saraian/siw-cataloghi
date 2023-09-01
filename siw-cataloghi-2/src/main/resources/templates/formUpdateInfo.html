@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Modifica prodotto</title>
+		<link rel="stylesheet" href="/stile.css?version=3"/>
+	</head>
+	<body>
+		<header th:replace="fragments/base.html::intestazione"></header>
+		<h1> Aggiorna il prodotto </h1>
+		<div>
+			<form th:action="@{/updateName/{idProduct} (idProduct=${product.id})}" method="POST" th:object="${name}">
+			<label>Nome:</label> <span><input required type="text" th:field="${name}"/></span> 
+			<button type="submit"> Applica </button> 
+			</form>
+		</div>
+		<div>
+			<form th:action="@{/updateDescription/{idProduct} (idProduct=${product.id})}" method="POST" th:object="${description}">
+			<label>Descrizione:</label> <span><input required type="text" th:field="${description}"/></span> 
+			<button type="submit"> Applica </button> 
+			</form>
+		</div>
+		<div>
+			<form th:action="@{/updatePrice/{idProduct} (idProduct=${product.id})}" method="POST"  th:object="${price}">
+			<label>Prezzo:</label> <span><input required type="number" th:field="${price}"/></span> 
+			<button type="submit"> Applica </button> 
+			</form>
+		</div>
+	</body>
+</html>

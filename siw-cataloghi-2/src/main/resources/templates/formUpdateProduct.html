@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title th:text="${movie.title}">Modifica film</title>
+		<title th:text="${product.name}">Modifica prodotto</title>
 		<link rel="stylesheet" href="/stile.css?version=3"/>
 	</head>
 	<body>
@@ -14,9 +14,12 @@
 			<a th:href="@{/updateSupplierForProduct/{idProduct} (idProduct=${product.id})}"> Aggiungi o rimuovi fornitori </a>
 		</div>
 		<div>
-			<a th:href"@{/updateProductInfo/{idProduct} (idProduct=${product.id})}> Aggiorna le informazioni del prodotto </a>
+			<a th:href="@{/updateProductInfo/{idProduct} (idProduct=${product.id})}"> Aggiorna le informazioni del prodotto </a>
+		</div>
 		<div>
-			<a th:href="@{/deleteProduct/{idProduct} (idProduct=${product.id})}"> Rimuovi questo prodotto </a>
+			<form th:action="@{/deleteProduct/{idProduct} (idProduct=${product.id})}" method="POST"> 
+			<button type="submit"> Rimuovi questo prodotto </button> 
+			</form>
 		</div>
 	</body>
 </html>

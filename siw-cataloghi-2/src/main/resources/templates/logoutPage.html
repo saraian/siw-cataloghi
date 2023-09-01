@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Nuovo artista</title>
+		<link rel="stylesheet" href="/stile.css?version=3"/>
+	</head>
+	<body>
+		<header th:replace="fragments/base.html::intestazione"></header>
+		<form th:action="@{/logout}" method="POST">
+			<h1>Sicuro di voler fare logout?</h1>
+			<div>
+				<span><button type="submit"> Conferma </button> </span>
+			</div>
+			<div> <a th:href="@{/}"> Torna indietro </a> </div>
+	</body>
+</html>

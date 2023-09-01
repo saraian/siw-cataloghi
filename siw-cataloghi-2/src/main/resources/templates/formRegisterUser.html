@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Login</title>
+		<link rel="stylesheet" href="/stile.css?version=3"/>
+	</head>
+	<body>
+	<header th:replace="fragments/base.html::intestazione"></header>
+	<h1>Registrati </h1>
+	<form th:action="@{/register}" method="POST">
+	<div th:if="${#fields.globalErrors()}" th:text="${err}">
+		<p th:each="err:${#fields.globalErrors()}" th:text="${err}">...</p>
+	</div>
+	<div>
+		<label>Nome:</label> <span><input type="text" th:field="${user.name}"/></span>
+	</div>
+	<div>
+		<label>Cognome:</label><span><input type="text" th:field="${user.surname}"/></span>
+	</div>
+	<div>
+		Data di nascita:<span><input type="date" th:field="${user.dateOfBirth}"/></span>
+	</div>
+	<div>
+		<label>E-mail:</label><span><input required type="text" th:field="${user.email}"/></span>
+		<span th:if="${#fields.hasErrors('user.email')}" th:errors="${user.email}"></span>
+	</div>
+	<div>
+		<label>Username:</label> <span><input required type="text" placeholder="username" th:field="${credentials.username}"/></span>
+		<span th:if="${#fields.hasErrors('credentials.username')}" th:errors="${credentials.username}"></span>
+	</div>
+	<div>
+		<label>Password:</label> <span><input required type="password" placeholder="password" th:field="${credentials.password}"/></span>
+		<span th:if="${#fields.hasErrors('credentials.password')}" th:errors="${credentials.password}"></span>
+	</div>
+	<div>
+	<span><button type="submit" value="Register">Conferma </button> </span>
+	</div>
+	</form>
+	</body>
+</html>

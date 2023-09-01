@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Fornitore</title>
+		<link rel="stylesheet" href="/stile.css?version=2"/>
+	</head>
+	<body>
+		<header th:replace="fragments/base.html::intestazione"></header>
+		<div th:if="${supplier}">
+			<h1 th:text="${supplier.name}">Nome</h1>
+			<div> E-mail: <span th:text="${supplier.email}"> Email </span> </div>
+			<div> Indirizzo: <span th:text="${supplier.address}"> Indirizzo </span> </div>
+		</div>
+		<div th:unless="${supplier}">Non esiste</div>	
+	</body>
+</html>

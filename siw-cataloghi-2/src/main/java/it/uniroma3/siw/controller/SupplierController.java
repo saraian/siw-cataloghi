@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import it.uniroma3.siw.model.Supplier;
@@ -36,5 +37,18 @@ public class SupplierController {
 			model.addAttribute("messaggioErrore", "Questo fornitore è già registrato nel catalogo");
 			return "formNewSupplier.html";
 		}
+	}
+	
+	@GetMapping("/suppliers")
+	public String allSuppliers(Model model) {
+		model.addAttribute("suppliers", this.supplierRepository.findAll());
+		return "suppliers.html";
+	}
+	
+	@GetMapping("/supplier/{id}")
+	public String getSupplier(@PathVariable("id") Long id, Model model) {
+		Supplier supplier=this.supplierRepository.findById(id).get();
+		model.addAttribute("supplier", supplier);
+		return "supplier.html";
 	}
 }

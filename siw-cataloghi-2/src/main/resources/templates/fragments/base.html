@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragments="headerfiles(title)">
+	<meta charset="UTF-8"/>
+	<link th:href="@{/css/my-style.css}" rel="stylesheet">
+	<title th:text="${title}"></title>
+</head>
+<body>
+	<header th:fragment="intestazione">
+		<h1><a th:href="@{/}">SiW-Spring Very Simple Demo </a> 
+		<a th:href="@{/getLogout}"> Logout </a> </h1>
+	</header>
+	
+	<footer th:fragment="footer">
+		<a th:href="@{}">Home</a>
+	</footer>

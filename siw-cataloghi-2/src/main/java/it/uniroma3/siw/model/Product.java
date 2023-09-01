@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 
 @Entity
 public class Product {
@@ -19,7 +20,7 @@ public class Product {
 	@NotBlank
 	public String name;
 	public String description;
-	@NotBlank
+	@Positive
 	public float price;
 	@ManyToMany
 	public List<Supplier> suppliers;

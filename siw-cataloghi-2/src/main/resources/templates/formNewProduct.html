@@ -20,6 +20,7 @@
 	</div>
 	<div>
 		<label>Prezzo:</label> <span><input required type="number" th:field="${product.price}"/></span>
+		<span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
 	</div>
 	<div>
 	<span><button type="submit">Conferma </button> </span>
