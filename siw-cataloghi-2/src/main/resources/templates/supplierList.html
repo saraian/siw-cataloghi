@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Lista fornitori</title>
+		<link rel="stylesheet" href="/stile.css?version=3"/>
+	</head>
+	<body>
+	<header th:replace="fragments/base.html::intestazione"></header>
+	<h1>Fornitori</h1>
+		<div th:if="${suppliers.empty}"> 
+			<div> Non abbiamo ancora fornitori </div>
+		</div>
+		<div th:each="supplier:${suppliers}">
+			<a th:href="@{/orderBySupplier/{id} (id=${supplier.id})}">
+				<li th:text="${supplier.name}"> Nome fornitore </li> 
+			</a>
+		</div>
+	</body>
+</html>

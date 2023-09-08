@@ -17,7 +17,22 @@
 			</a>
 			</div>
 			<h2> Commenti dagli utenti: </h2>
-			<div> <a th:href="@{/addComment/{idProduct} (idProduct=${product.id})}"> Aggiungi un commento </a> </div>
+			<form th:action="@{/addingComment/{idProduct} (idProduct=${product.id})}" method="POST" th:object="${newComment}">
+				<div th:if="${#fields.globalErrors()}" th:text="${err}">
+				<p th:each="err:${#fields.globalErrors()}" th:text="${err}">...</p>
+				</div>
+				<div>
+					<label>Titolo:</label> <span><input required type="text" th:field="${newComment.title}"/></span>
+					<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+				</div>
+				<div>
+					<label>Testo:</label> <span><input required type="text" th:field="${newComment.text}"/></span>
+					<span th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></span>
+				</div>
+				<div>
+				<span><button type="submit">Conferma </button> </span>
+				</div>
+			</form>
 			<div th:each="userComment:${userComments}">
 				<div th:text=${userComment.credentials.username}> User </div>
 				<div> <span th:text="${userComment.title}+': '"> Titolo: </span> <span th:text=${userComment.text}> Testo </span> </div>

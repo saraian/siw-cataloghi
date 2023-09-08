@@ -1,19 +1,25 @@
 package it.uniroma3.siw.model;
 
 import java.util.Objects;
-
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
 
+@Entity
 public class Comment {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
+	@NotBlank
 	private String title;
+	@NotBlank
 	private String text;
-	private User user;
+	@ManyToOne
+	private Credentials credentials;
 	
 	public Long getId() {
 		return id;
@@ -39,12 +45,12 @@ public class Comment {
 		this.text = text;
 	}
 	
-	public User getUser() {
-		return user;
+	public Credentials getCredentials() {
+		return credentials;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setCredentials(Credentials credentials) {
+		this.credentials = credentials;
 	}
 
 	@Override

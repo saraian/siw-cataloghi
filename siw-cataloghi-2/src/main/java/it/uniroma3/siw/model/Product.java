@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 
@@ -24,6 +25,8 @@ public class Product {
 	public float price;
 	@ManyToMany
 	public List<Supplier> suppliers;
+	@OneToMany
+	private List<Comment> comments;
 	
 	public Long getId() {
 		return id;
@@ -65,6 +68,14 @@ public class Product {
 		this.suppliers = suppliers;
 	}
 	
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(description, name);

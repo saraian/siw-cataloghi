@@ -12,7 +12,7 @@
 		</div>
 		<div th:each="product:${products}">
 			<a th:href="@{/product/{idProduct} (idProduct=${product.id})}">
-				<li th:text="${product.name}"> Nome prodotto </li> 
+				<li th:text="${product.name}+' ('+${product.price}+'$)'"> Nome prodotto </li> 
 			</a>
 		</div>
 	</body>

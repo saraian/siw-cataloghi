@@ -1,6 +1,7 @@
 package it.uniroma3.siw.model;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -25,6 +26,7 @@ public class User {
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private LocalDate dateOfBirth;
 	private String email;
+	
 	public Long getId() {
 		return id;
 	}
@@ -55,6 +57,19 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
+	@Override
+	public int hashCode() {
+		return Objects.hash(email, id);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		return Objects.equals(email, other.email) && Objects.equals(id, other.id);
+	}
 }
