@@ -8,20 +8,15 @@
 		<header th:replace="fragments/base.html::intestazione"></header>
 		<h1> Aggiorna il prodotto </h1>
 		<div>
-			<form th:action="@{/updateName/{idProduct} (idProduct=${product.id})}" method="POST" th:object="${name}">
-			<label>Nome:</label> <span><input required type="text" th:field="${name}"/></span> 
-			<button type="submit"> Applica </button> 
-			</form>
-		</div>
-		<div>
-			<form th:action="@{/updateDescription/{idProduct} (idProduct=${product.id})}" method="POST" th:object="${description}">
-			<label>Descrizione:</label> <span><input required type="text" th:field="${description}"/></span> 
-			<button type="submit"> Applica </button> 
-			</form>
-		</div>
-		<div>
-			<form th:action="@{/updatePrice/{idProduct} (idProduct=${product.id})}" method="POST"  th:object="${price}">
-			<label>Prezzo:</label> <span><input required type="number" th:field="${price}"/></span> 
+			<form th:action="@{/updateProductInfo/{idProduct} (idProduct=${product.id})}" method="POST" th:object="${product}">
+			<div>
+			<label>Nome:</label> <span><input required type="text" th:field="${product.name}" th:value="${product.name}"/></span>
+			</div> 
+			<label>Descrizione:</label> <span><input required type="text" th:field="${product.description}" th:value="${product.description}"/></span> 
+			</div>
+			<div>
+			<label>Prezzo:</label> <span><input required type="number" th:field="${product.price}" th:value="${product.price}"/></span>
+			</div> 
 			<button type="submit"> Applica </button> 
 			</form>
 		</div>

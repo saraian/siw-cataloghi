@@ -13,11 +13,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import it.uniroma3.siw.model.Comment;
 import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.Product;
 import it.uniroma3.siw.model.Supplier;
-import it.uniroma3.siw.repository.CommentRepository;
 import it.uniroma3.siw.repository.ProductRepository;
 import it.uniroma3.siw.repository.SupplierRepository;
 import it.uniroma3.siw.service.CommentService;
@@ -33,7 +31,6 @@ public class ProductController {
 	@Autowired ProductValidator productValidator;
 	@Autowired ProductService productService;
 	@Autowired CredentialsService credentialsService;
-	@Autowired CommentRepository commentRepository;
 	@Autowired CommentService commentService;
 	
 	@GetMapping("/product/{idProduct}")
@@ -117,39 +114,22 @@ public class ProductController {
 	public String updateProduct(@PathVariable("idProduct") Long idProduct, Model model) {
 		Product product=this.productRepository.findById(idProduct).get();
 		model.addAttribute("product", product);
-		model.addAttribute("name", new String());
-		model.addAttribute("description", new String());
-		model.addAttribute("price", 0);
 		return "formUpdateInfo.html";
 	}
 	
-	@PostMapping("/updateName/{idProduct}") 
-	public String updateProductName(@PathVariable("idProduct") Long idProduct, @ModelAttribute("name") String name, Model model) {
-		Product product=this.productRepository.findById(idProduct).get();
-		product.setName(name);
-		this.productRepository.save(product);
-		model.addAttribute("product",product);
-		return "product.html";
-	}
-	
-	@PostMapping("/updateDescription/{idProduct}") 
-	public String updateProductDescription(@PathVariable("idProduct") Long idProduct, @ModelAttribute("description") String description, Model model) {
-		Product product=this.productRepository.findById(idProduct).get();
-		product.setDescription(description);
-		this.productRepository.save(product);
-		model.addAttribute("product",product);
-		return "product.html";
-	}
-	
-	@PostMapping("/updatePrice/{idProduct}") 
-	public String updateProductPrice(@PathVariable("idProduct") Long idProduct, @ModelAttribute("price") Float price, Model model) {
-		Product product=this.productRepository.findById(idProduct).get();
-		if(price>0) {
-			product.setPrice(price);
-			this.productRepository.save(product);
+	@PostMapping("/updateProductInfo/{idProduct}") 
+	public String updateProductName(@ModelAttribute("product") Product product, @PathVariable("idProduct") Long idProduct, Model model) {
+		Product found=this.productRepository.findById(idProduct).get();
+		if(!product.getName().isBlank()&&!(product.getPrice()<=0)) {
+			found.setName(product.getName());
+			found.setDescription(product.getDescription());
+			found.setPrice(product.getPrice());
+			this.productRepository.save(found);
+			model.addAttribute("product",found);
+			return "product.html";
 		}
-		model.addAttribute("product",product);
-		return "product.html";
+		model.addAttribute("messaggioErrore", "Assicurati di aggiungere sia un nome che un prezzo validi");
+		return "formUpdateInfo.html";
 	}
 	
 	@GetMapping("/formSearchProduct")
@@ -183,53 +163,5 @@ public class ProductController {
 		List<Product> products=this.productRepository.findBySuppliersContaining(supplier);
 		model.addAttribute("products", products);
 		return "products.html";
-	}
-	
-	@GetMapping("/addComment/{idProduct}")
-	public String addCommentPage(@PathVariable("idProduct") Long id, Model model) {
-		Product product=this.productRepository.findById(id).get();
-		UserDetails userDetails=(UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Credentials credentials=credentialsService.getCredentials(userDetails.getUsername());
-		model.addAttribute("product", product);
-		model.addAttribute("newComment", new Comment());
-		model.addAttribute("userComments", this.commentService.commentsByCredentials(credentials, product.getComments()));
-		model.addAttribute("comments", this.commentService.commentsNotByCredentials(credentials, product.getComments()));
-		return "productAddComment.html";
-	}
-	
-	@PostMapping("/addingComment/{idProduct}")
-	public String addComment(@ModelAttribute("newComment") Comment newComment, @PathVariable("idProduct") Long id, Model model) {
-		Product product=this.productRepository.findById(id).get();
-		UserDetails userDetails=(UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Credentials credentials=credentialsService.getCredentials(userDetails.getUsername());
-		newComment.setCredentials(credentials);
-		product.getComments().add(newComment);
-		this.commentRepository.save(newComment);
-		this.productRepository.save(product);
-		model.addAttribute("product", product);
-		model.addAttribute("userComments", this.commentService.commentsByCredentials(credentials, product.getComments()));
-		model.addAttribute("comments", this.commentService.commentsNotByCredentials(credentials, product.getComments()));
-		return "product.html";
-	}
-	
-	@GetMapping("/updateComment/{idProduct}/{idComment}")
-	public String updateCommentPage(@PathVariable("idProduct") Long idP, @PathVariable("idComment") Long idC, Model model) {
-		Product product=this.productRepository.findById(idP).get();
-		Comment comment=this.commentRepository.findById(idC).get();
-		model.addAttribute("upComment", comment);
-		model.addAttribute("product", product);
-		return "productUpdateComment.html";
-	}
-	
-	@PostMapping("/updateComment/{idProduct}/{idComment}")
-	public String saveUpdate(@ModelAttribute("upComment") Comment comment, @PathVariable("idProduct") Long id,
-			@PathVariable("idComment") Long idc, Model model) {
-		Product product=this.productRepository.findById(id).get();
-		UserDetails userDetails=(UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Credentials credentials=credentialsService.getCredentials(userDetails.getUsername());
-		model.addAttribute("product", product);
-		model.addAttribute("userComments", this.commentService.commentsByCredentials(credentials, product.getComments()));
-		model.addAttribute("comments", this.commentService.commentsNotByCredentials(credentials, product.getComments()));
-		return "product.html";
 	}
 }
