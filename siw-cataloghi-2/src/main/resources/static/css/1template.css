@@ -1,0 +1,23 @@
+header {
+  background-color: blue;
+  color: blue;
+  padding:20px;
+}
+
+body {
+	background-color: lightblue;
+	font-family: 'Lucida Console', monospace;
+}
+
+div {
+	text-align: center;
+}
+
+.logOut{
+	text-align: right;
+}
+
+.toIndex{
+	text-align: left;
+}
+
