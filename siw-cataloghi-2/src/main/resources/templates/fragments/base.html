@@ -6,11 +6,15 @@
 	<title th:text="${title}"></title>
 </head>
 <body>
-	<header th:fragment="intestazione">
-		<h1><a class="toIndex" th:href="@{/}">SiW-Spring Very Simple Demo </a> 
-		<a class="logOut" th:href="@{/getLogout}"> Logout </a> </h1>
-	</header>
+	<article th:fragment="intestazione">
+		<nav> <p> <a class="logOut" th:href="@{/getLogout}"> Logout </a> </p> </nav>
+		<header>
+		<div><img src="/media/logo.png" height=70px width=180px></div>
+		<div><a class="homePage" th:href="@{/}">HomePage</a> 
+		<a class="homePage" th:href="@{/products}">Prodotti</a> </div> 
+		</header>
+	</article>
 	
 	<footer th:fragment="footer">
-		<a th:href="@{}">Home</a>
+		<a th:href="@{/}"><img src="/media/logo.png" height=40px width=100px></a>
 	</footer>

@@ -5,6 +5,7 @@
 		<link  rel="stylesheet" th:href="@{css/1template.css}"/>
 	</head>
 	<body>
+		<header th:replace="fragments/base.html::intestazione"></header>
 		<a href="formSearchProduct.html" th:href="@{/formSearchProductByName}"> 
 			<div> Esplora i prodotti in ordine alfabetico</div>
 		</a>
@@ -14,4 +15,5 @@
 		<a href="formSearchProduct.html" th:href="@{/formSearchBySupplier}"> 
 			<div> Trova tutti i prodotti di un fornitore </div>
 		</a>
+		<footer th:replace="fragments/base.html::footer"></footer>
 	</body>

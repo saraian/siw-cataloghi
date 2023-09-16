@@ -113,19 +113,28 @@ public class ProductController {
 	@GetMapping("/updateProductInfo/{idProduct}")
 	public String updateProduct(@PathVariable("idProduct") Long idProduct, Model model) {
 		Product product=this.productRepository.findById(idProduct).get();
+		Product newProduct=new Product();
+		newProduct.setName(product.getName());
+		newProduct.setPrice(product.getPrice());
+		newProduct.setDescription(product.getDescription());
 		model.addAttribute("product", product);
+		model.addAttribute("newProduct", newProduct);
 		return "formUpdateInfo.html";
 	}
 	
 	@PostMapping("/updateProductInfo/{idProduct}") 
-	public String updateProductName(@ModelAttribute("product") Product product, @PathVariable("idProduct") Long idProduct, Model model) {
+	public String updateProductName(@ModelAttribute("newProduct") Product product, @PathVariable("idProduct") Long idProduct, Model model) {
 		Product found=this.productRepository.findById(idProduct).get();
+		UserDetails userDetails=(UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Credentials credentials=credentialsService.getCredentials(userDetails.getUsername());
 		if(!product.getName().isBlank()&&!(product.getPrice()<=0)) {
 			found.setName(product.getName());
 			found.setDescription(product.getDescription());
 			found.setPrice(product.getPrice());
 			this.productRepository.save(found);
 			model.addAttribute("product",found);
+			model.addAttribute("userComments", this.commentService.commentsByCredentials(credentials, product.getComments()));
+			model.addAttribute("comments", this.commentService.commentsNotByCredentials(credentials, product.getComments()));
 			return "product.html";
 		}
 		model.addAttribute("messaggioErrore", "Assicurati di aggiungere sia un nome che un prezzo validi");
@@ -162,6 +171,12 @@ public class ProductController {
 		Supplier supplier=this.supplierRepository.findById(id).get();
 		List<Product> products=this.productRepository.findBySuppliersContaining(supplier);
 		model.addAttribute("products", products);
+		return "products.html";
+	}
+	
+	@GetMapping("/products") 
+	public String allProducts(Model model) {
+		model.addAttribute("products", this.productRepository.findAll());
 		return "products.html";
 	}
 }

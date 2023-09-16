@@ -10,15 +10,16 @@
 		<div>
 			<form th:action="@{/updateProductInfo/{idProduct} (idProduct=${product.id})}" method="POST" th:object="${product}">
 			<div>
-			<label>Nome:</label> <span><input required type="text" th:field="${product.name}" th:value="${product.name}"/></span>
+			<label>Nome:</label> <span><input required type="text" th:field="${newProduct.name}" th:value="${newProduct.name}"/></span>
 			</div> 
-			<label>Descrizione:</label> <span><input required type="text" th:field="${product.description}" th:value="${product.description}"/></span> 
+			<label>Descrizione:</label> <span><input required type="text" th:field="${newProduct.description}" th:value="${newProduct.description}"/></span> 
 			</div>
 			<div>
-			<label>Prezzo:</label> <span><input required type="number" th:field="${product.price}" th:value="${product.price}"/></span>
+			<label>Prezzo:</label> <span><input required type="number" th:field="${newProduct.price}" th:value="${newProduct.price}"/></span>
 			</div> 
 			<button type="submit"> Applica </button> 
 			</form>
 		</div>
+		<footer th:replace="fragments/base.html::footer"></footer>
 	</body>
 </html>

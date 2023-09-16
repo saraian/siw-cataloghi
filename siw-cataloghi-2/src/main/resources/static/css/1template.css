@@ -1,23 +1,97 @@
 header {
-  background-color: blue;
+  background-color: #33658A;
   color: blue;
-  padding:20px;
-}
-
-body {
-	background-color: lightblue;
-	font-family: 'Lucida Console', monospace;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  font-size: large;
+  height: 100px;
+  flex-direction: column;
 }
 
 div {
 	text-align: center;
 }
 
-.logOut{
-	text-align: right;
+article {
+	display:flex;
+	flex-direction:column;
+	height: 100%;
 }
 
-.toIndex{
-	text-align: left;
+nav {
+	background-color: #274C68;
+	display: flex;
+	margin:0;
 }
 
+footer {
+	background-color: #274C68;
+	display: flex;
+	margin:0;
+	height:80px;
+	margin-top: 500px;
+	justify-content: center;
+	align-items: center;
+}
+
+body {
+	margin-top: 0;
+	margin-left: 0;
+	margin-right: 0;
+	margin-bottom: 0;
+	font-family: 'Courier', monospace;
+	color: #341C1C;
+	background-color: lightblue;
+	font-family: 'Lucida Console', monospace;
+}
+
+.index, .indexAdmin {
+	display:flex;
+  	flex-direction: column;
+  	justify-content: center;
+  	align-items:center;
+}
+
+a:link {
+	text-decoration:none;
+	color: #341C1C;
+}
+
+a:visited {
+	text-decoration:none;
+	color: #341C1C;
+}
+
+a:hover {
+	text-decoration:none;
+	color: #A35C3E;
+}
+
+form {
+	display:flex;
+	text-align:left;
+  	flex-direction: column;
+  	justify-content: center;
+  	align-items:center;
+}
+
+button {
+  color: white;
+  padding: 5px 10px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+label {
+	text-align:left;
+	display:table;
+}
+
+div, h1 {
+	text-align:center;
+}
+
+li {
+	list-style-type: none;
+}

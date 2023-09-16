@@ -5,10 +5,14 @@
 		<link  rel="stylesheet" th:href="@{css/1template.css}"/>
 	</head>
 	<body>
+		<header th:replace="fragments/base.html::intestazione"></header>
+		<div class="index">
 		<a href="formSearchProduct.html" th:href="@{/formSearchProduct}"> 
 			<div> Esplora il catalogo </div>
 		</a>
 		<a href="suppliers.html" th:href="@{/suppliers}"> 
 			<div> Mostra tutti i fornitori </div>
 		</a>
+		</div>
+		<footer th:replace="fragments/base.html::footer"></footer>
 	</body>

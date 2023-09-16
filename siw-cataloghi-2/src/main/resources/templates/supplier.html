@@ -11,6 +11,7 @@
 			<div> E-mail: <span th:text="${supplier.email}"> Email </span> </div>
 			<div> Indirizzo: <span th:text="${supplier.address}"> Indirizzo </span> </div>
 		</div>
-		<div th:unless="${supplier}">Non esiste</div>	
+		<div th:unless="${supplier}">Non esiste</div>
+		<footer th:replace="fragments/base.html::footer"></footer>	
 	</body>
 </html>
