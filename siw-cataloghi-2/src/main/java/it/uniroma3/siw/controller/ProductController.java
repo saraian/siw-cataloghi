@@ -133,8 +133,8 @@ public class ProductController {
 			found.setPrice(product.getPrice());
 			this.productRepository.save(found);
 			model.addAttribute("product",found);
-			model.addAttribute("userComments", this.commentService.commentsByCredentials(credentials, product.getComments()));
-			model.addAttribute("comments", this.commentService.commentsNotByCredentials(credentials, product.getComments()));
+			model.addAttribute("userComments", this.commentService.commentsByCredentials(credentials, found.getComments()));
+			model.addAttribute("comments", this.commentService.commentsNotByCredentials(credentials, found.getComments()));
 			return "product.html";
 		}
 		model.addAttribute("messaggioErrore", "Assicurati di aggiungere sia un nome che un prezzo validi");

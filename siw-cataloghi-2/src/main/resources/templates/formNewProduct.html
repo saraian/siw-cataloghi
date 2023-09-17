@@ -7,6 +7,7 @@
 	<body>
 	<header th:replace="fragments/base.html::intestazione"></header>
 	<h1>Aggiungi un prodotto </h1>
+	<div><p th:text="${messaggioErrore}"> </p></div>
 	<form th:action="@{/formNewProduct}" method="POST" th:object="${product}">
 	<div th:if="${#fields.globalErrors()}" th:text="${err}">
 		<p th:each="err:${#fields.globalErrors()}" th:text="${err}">...</p>
@@ -19,7 +20,7 @@
 		<label>Descrizione:</label> <span><input required type="text" th:field="${product.description}"/></span>
 	</div>
 	<div>
-		<label>Prezzo:</label> <span><input required type="number" th:field="${product.price}"/></span>
+		<label>Prezzo:</label> <span><input required type="number" min="0.01" step="0.01" th:field="${product.price}"/></span>
 		<span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
 	</div>
 	<div>

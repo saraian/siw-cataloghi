@@ -7,10 +7,12 @@ header {
   font-size: large;
   height: 100px;
   flex-direction: column;
+  margin:0;
 }
 
 div {
 	text-align: center;
+	font-size: large;
 }
 
 article {
@@ -46,11 +48,37 @@ body {
 	font-family: 'Lucida Console', monospace;
 }
 
-.index, .indexAdmin {
+.index{
+	margin:100px;
 	display:flex;
-  	flex-direction: column;
-  	justify-content: center;
+  	justify-content: space-around;
   	align-items:center;
+  	font-size: x-large;
+}
+
+.indexAdmin {
+	margin-left: 400px;
+	margin-right: 400px;
+	margin-top: 200px;
+	margin-bottom: 50px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	background-color: rgb(255, 255, 255, 0.5);
+}
+
+.indexAdmin div {
+	margin: 10px 10px 5px 5px;
+}
+
+.indexAdmin h1 {
+	margin: 10px 10px 5px 5px;
+}
+
+.flex-index {
+	justify-content: center;
+	margin:8px;
 }
 
 a:link {
@@ -65,11 +93,11 @@ a:visited {
 
 a:hover {
 	text-decoration:none;
-	color: #A35C3E;
+	color: rgb(0, 0, 255);
 }
 
 form {
-	display:flex;
+	display: flex;
 	text-align:left;
   	flex-direction: column;
   	justify-content: center;
@@ -78,6 +106,7 @@ form {
 
 button {
   color: white;
+  background-color:dark blue;
   padding: 5px 10px;
   margin: 4px 2px;
   cursor: pointer;

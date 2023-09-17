@@ -55,10 +55,14 @@ public class CommentController {
 	
 	@GetMapping("/updateComment/{idProduct}/{idComment}")
 	public String updateCommentPage(@PathVariable("idProduct") Long idP, @PathVariable("idComment") Long idC, Model model) {
+		UserDetails userDetails=(UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Credentials credentials=credentialsService.getCredentials(userDetails.getUsername());
 		Product product=this.productRepository.findById(idP).get();
 		Comment comment=this.commentRepository.findById(idC).get();
 		model.addAttribute("upComment", comment);
 		model.addAttribute("product", product);
+		model.addAttribute("userComments", this.commentService.commentsByCredentials(credentials, product.getComments()));
+		model.addAttribute("comments", this.commentService.commentsNotByCredentials(credentials, product.getComments()));
 		return "productUpdateComment.html";
 	}
 	

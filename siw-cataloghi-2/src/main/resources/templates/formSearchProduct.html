@@ -6,14 +6,16 @@
 	</head>
 	<body>
 		<header th:replace="fragments/base.html::intestazione"></header>
-		<a href="formSearchProduct.html" th:href="@{/formSearchProductByName}"> 
+		<h2>
+		<a class="flex-index" href="formSearchProduct.html" th:href="@{/formSearchProductByName}"> 
 			<div> Esplora i prodotti in ordine alfabetico</div>
 		</a>
-		<a href="formSearchProduct.html" th:href="@{/formSearchProductByPrice}"> 
+		<a class="flex-index" href="formSearchProduct.html" th:href="@{/formSearchProductByPrice}"> 
 			<div> Esplora i prodotti in ordine di prezzo </div>
 		</a>
-		<a href="formSearchProduct.html" th:href="@{/formSearchBySupplier}"> 
+		<a class="flex-index" href="formSearchProduct.html" th:href="@{/formSearchBySupplier}"> 
 			<div> Trova tutti i prodotti di un fornitore </div>
 		</a>
+		</h2>
 		<footer th:replace="fragments/base.html::footer"></footer>
 	</body>
