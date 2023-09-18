@@ -8,14 +8,9 @@
 	<header th:replace="fragments/base.html::intestazione"></header>
 	<h1>Login </h1>
 	<form th:action="@{/login}" method="POST">
-	<c:if test="${param.error != null}">
-    	<div>
-    		Failed to login.
-            <c:if test="${SPRING_SECURITY_LAST_EXCEPTION != null}">
-            	Reason: <c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />
-            </c:if>
-        </div>
-    </c:if>
+	<div th:if="${#fields.globalErrors()}" th:text="${err}">
+		<p th:each="err:${#fields.globalErrors()}" th:text="${err}">...</p>
+	</div>
 	</div>
 	<div>
 		<label>Username:</label> <span><input required type="text" id="username" name="username"/></span>

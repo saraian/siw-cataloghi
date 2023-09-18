@@ -10,6 +10,7 @@
 			<form th:action="@{/updateProductInfo/{idProduct} (idProduct=${product.id})}" method="POST" th:object="${newProduct}">
 			<div>
 			<label>Nome:</label> <span><input required type="text" th:field="${newProduct.name}" th:value="${newProduct.name}"/></span>
+			<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
 			</div> 
 			<label>Descrizione:</label> <span><input required type="text" th:field="${newProduct.description}" th:value="${newProduct.description}"/></span> 
 			</div>

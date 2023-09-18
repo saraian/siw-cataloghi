@@ -123,11 +123,13 @@ public class ProductController {
 	}
 	
 	@PostMapping("/updateProductInfo/{idProduct}") 
-	public String updateProductName(@ModelAttribute("newProduct") Product product, @PathVariable("idProduct") Long idProduct, Model model) {
+	public String updateProductName(@ModelAttribute("newProduct") Product product, BindingResult bindingResult,
+			@PathVariable("idProduct") Long idProduct, Model model) {
+		this.productValidator.validate(product, bindingResult);
 		Product found=this.productRepository.findById(idProduct).get();
 		UserDetails userDetails=(UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Credentials credentials=credentialsService.getCredentials(userDetails.getUsername());
-		if(!product.getName().isBlank()&&!(product.getPrice()<=0)) {
+		if(!bindingResult.hasErrors()) {
 			found.setName(product.getName());
 			found.setDescription(product.getDescription());
 			found.setPrice(product.getPrice());
